@@ -1,4 +1,5 @@
 function handleDangKy(event) {
+  event.preventDefault();
   const messages = [];
   const fullName = document.getElementById("fullName").value;
   const username = document.getElementById("username").value;
@@ -47,11 +48,33 @@ function handleDangKy(event) {
           },
         ])
       );
+      alert("đăng ký thành công");
+      return;
     } else {
       // c2
+      const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
+      let isChecked = false;
+      // kiểm tra tài khoản
+      for (let i = 0; i < currentUsers.length; i++) {
+        if (currentUsers[i].username === username) {
+          isChecked = true;
+          break;
+        }
+      }
+      if (isChecked) {
+        alert("tài khoản đã tồn tại");
+        return;
+      } else {
+        const userCreate = {
+          fullName,
+          username,
+          password,
+        };
+        currentUsers.push(userCreate);
+        localStorage.setItem("users", JSON.stringify(currentUsers));
+        alert("đăng ký thành công");
+        return;
+      }
     }
-    // case 1
-
-    alert("đăng ký thành công");
   }
 }
