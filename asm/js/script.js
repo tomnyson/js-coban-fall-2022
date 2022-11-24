@@ -78,3 +78,55 @@ function handleDangKy(event) {
     }
   }
 }
+
+function handleLogin(event) {
+  event.preventDefault();
+  const messages = [];
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  console.log({ username, password });
+
+  if (username === "") {
+    messages.push("tài khoản không được rỗng");
+  }
+  // password > 6 kí tự
+  if (password === "") {
+    messages.push("mât khẩu không được rỗng");
+  }
+  if (messages.length > 0) {
+    let html = "";
+    for (let i = 0; i < messages.length; i++) {
+      html += `<span class='text-danger'>${messages[i]}</span> <br>`;
+    }
+    document.getElementById("errors").innerHTML = html;
+  } else {
+    // thanh cong
+    const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
+    if (currentUsers.length > 0) {
+      let isChecked = false;
+      let user = null;
+      // kiểm tra tài khoản
+      for (let i = 0; i < currentUsers.length; i++) {
+        if (
+          currentUsers[i].username === username &&
+          currentUsers[i].password === password
+        ) {
+          isChecked = true;
+          user = currentUsers[i];
+          break;
+        }
+      }
+      if (isChecked) {
+        // luu thong tin user
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        alert("Đăng nhập thành công");
+        window.location.href = "/asm/admin.html";
+        return;
+        // dua ra thong bao
+      } else {
+        alert("Tài khoản or mật khẩu sai");
+        return;
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Login - Simple Blog Template</title>
+    <title>ADMIN</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -64,49 +64,60 @@
     <!-- Page Content -->
     <div class="container">
       <div class="row">
-        <div class="col-lg-2"></div>
+        <!-- Blog Post Content Column -->
+        <div class="col-lg-12">
+          <!-- Blog Post -->
 
-        <!-- Login content  -->
-        <div class="col-lg-8 login">
           <!-- Title -->
-          <h1>Đăng Nhập</h1>
-
+          <h1 class="post-title">Quản lý tin tức</h1>
           <!-- Login form -->
-          <form action="/blog/login" method="post" class="login-form">
+          <form action="/blog/signup" method="post" class="signup-form">
             <div class="form-group">
-              <label for="username">tài khoản</label>
+              <label for="fullname">tiêu đề</label>
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="fullName"
+                name="fullName"
                 class="form-control"
               />
+            </div>
+            <div class="form-group">
+              <label for="password">link hình ảnh</label>
+              <input
+                type="url"
+                id="password"
+                name="hinhanh"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="username">mô tả ngắn</label>
+              <textarea
+                maxlength="200"
+                id="mota_ngan"
+                name="username"
+                class="form-control"
+              ></textarea>
             </div>
 
             <div class="form-group">
-              <label for="password">Mật Khẩu</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
+              <label for="password">Mô tả dài</label>
+              <textarea
+                id="mota_dai"
                 class="form-control"
-              />
+                name="password"
+              ></textarea>
             </div>
-
             <button
               type="button"
-              onclick="handleLogin(event)"
+              onclick="handleThemPost(event)"
               class="btn btn-primary"
             >
-              Log in
+              Thêm
             </button>
             <div id="errors"></div>
-            <p>không có tài khoản? <a href="signup.html">Đăng ký</a></p>
           </form>
-          <!-- /form -->
         </div>
-
-        <div class="col-lg-2"></div>
       </div>
       <!-- /.row -->
     </div>
@@ -130,6 +141,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <script src="js/admin.js"></script>
   </body>
 </html>
