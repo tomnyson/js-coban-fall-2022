@@ -130,3 +130,29 @@ function handleLogin(event) {
     }
   }
 }
+renderListPost();
+function renderListPost() {
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+  posts.sort(function (a, b) {
+    return b.id - a.id;
+  });
+  let outHtml = "";
+  for (let i = 0; i < posts.length; i++) {
+    var today = new Date(posts[i].id);
+    outHtml += `<div>
+    <h2 class="post-title">
+    <a href="post.html?id=${posts[i].id}">${posts[i].tieude}</a>
+  </h2>
+  <p class="lead">by Admin</p>
+  <p>
+    <span class="glyphicon glyphicon-time"></span> Posted ${today}
+  </p>
+  <p>
+  ${posts[i].mota_ngan}
+  </p>
+  <a class="btn btn-default" href="post.html?id=${posts[i].id}">Read More</a>
+  <hr />
+  </div>`;
+  }
+  document.getElementById("posts-list").innerHTML = outHtml;
+}
